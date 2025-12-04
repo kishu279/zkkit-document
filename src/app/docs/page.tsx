@@ -14,6 +14,51 @@ export default function DocsPage() {
 
       <Separator />
 
+      {/* What is zkkit */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold">What is zkkit?</h2>
+        <p className="text-muted-foreground">
+          zkkit is a <strong>command-line toolkit</strong> that simplifies the
+          zero-knowledge proof workflow. It wraps powerful tools like{" "}
+          <strong>snarkjs</strong> (zk-SNARK library) and{" "}
+          <strong>circom</strong> (circuit compiler) to provide a streamlined
+          developer experience.
+        </p>
+
+        <Card className="p-5 border-l-4 border-l-primary bg-muted/30">
+          <h3 className="font-semibold mb-3">🔧 How the Tools Work Together</h3>
+          <div className="space-y-3 text-sm">
+            <div className="flex items-start gap-3">
+              <span className="text-primary font-bold min-w-6">1.</span>
+              <div>
+                <strong className="text-foreground">circom</strong> - Circuit
+                programming language that compiles your ZK circuits into R1CS
+                constraints and WASM files
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <span className="text-primary font-bold min-w-6">2.</span>
+              <div>
+                <strong className="text-foreground">snarkjs</strong> -
+                JavaScript and Pure WebAssembly library that performs the actual
+                zk-SNARK cryptographic operations (setup, proof generation,
+                verification)
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <span className="text-primary font-bold min-w-6">3.</span>
+              <div>
+                <strong className="text-foreground">zkkit</strong> - Convenience
+                wrapper that orchestrates these tools with sensible defaults,
+                making the entire workflow simpler
+              </div>
+            </div>
+          </div>
+        </Card>
+      </div>
+
+      <Separator />
+
       {/* What ZK Proofs Do */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold">

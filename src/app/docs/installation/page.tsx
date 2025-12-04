@@ -21,10 +21,28 @@ export default function InstallationPage() {
         <div>
           <h2 className="text-2xl font-semibold mb-2">Prerequisites</h2>
           <p className="text-muted-foreground">
-            Before installing zkkit, ensure you have the following tools
-            installed on your system.
+            zkkit requires these underlying tools to function. zkkit itself is a
+            wrapper that orchestrates circom and snarkjs commands.
           </p>
         </div>
+
+        <Card className="p-5 border-l-4 border-l-primary bg-muted/30">
+          <h3 className="font-semibold mb-3">ℹ️ Understanding Dependencies</h3>
+          <div className="space-y-2 text-sm text-muted-foreground">
+            <p>
+              <strong className="text-foreground">circom</strong> compiles
+              circuit code into mathematical constraints
+            </p>
+            <p>
+              <strong className="text-foreground">snarkjs</strong> performs the
+              actual cryptographic operations (powered by JavaScript and WASM)
+            </p>
+            <p>
+              <strong className="text-foreground">zkkit</strong> wraps these
+              tools with convenient CLI commands and sensible defaults
+            </p>
+          </div>
+        </Card>
 
         {/* Rust Installation */}
         <div className="space-y-4">

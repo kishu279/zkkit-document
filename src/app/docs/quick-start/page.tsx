@@ -18,12 +18,21 @@ export default function QuickStartPage() {
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold">Overview</h2>
         <p className="text-muted-foreground">
-          This guide will walk you through the complete workflow of creating a
-          simple zero-knowledge proof using zkkit's default tools. We'll create
-          a basic multiplier circuit that proves you know two numbers that
-          multiply to a specific result, without revealing the numbers
-          themselves.
+          This guide walks you through creating your first zero-knowledge proof.
+          You'll write a circuit in <strong>Circom</strong>, and zkkit will
+          orchestrate <strong>circom</strong> and <strong>snarkjs</strong> to
+          compile, prove, and verify it.
         </p>
+
+        <Card className="p-4 border-l-4 border-l-primary bg-muted/30">
+          <h3 className="font-semibold mb-2">🔍 What you'll learn:</h3>
+          <ul className="text-sm space-y-1 text-muted-foreground">
+            <li>• Write a Circom circuit (multiplier example)</li>
+            <li>• Use zkkit to wrap circom compilation</li>
+            <li>• Generate proofs with snarkjs via zkkit commands</li>
+            <li>• Verify proofs cryptographically</li>
+          </ul>
+        </Card>
       </div>
 
       <Separator />

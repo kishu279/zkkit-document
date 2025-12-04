@@ -19,9 +19,20 @@ export default function VerifyCommandPage() {
         <h2 className="text-2xl font-semibold">Description</h2>
         <p className="text-muted-foreground">
           The <code className="bg-muted px-1.5 py-0.5 rounded">verify</code>{" "}
-          command verifies a zero-knowledge proof using the verification key and
-          public signals to ensure the proof is valid.
+          command wraps <strong>snarkjs groth16 verify</strong> to verify a
+          zero-knowledge proof. snarkjs performs the cryptographic verification
+          using the verification key and public inputs.
         </p>
+
+        <Card className="p-4 border-l-4 border-l-primary bg-muted/30">
+          <p className="text-sm text-muted-foreground">
+            <strong className="text-foreground">Under the hood:</strong> This
+            command runs{" "}
+            <code className="bg-muted px-1 py-0.5 rounded text-xs">
+              snarkjs groth16 verify [verification_key] [public] [proof]
+            </code>
+          </p>
+        </Card>
       </div>
 
       <Separator />

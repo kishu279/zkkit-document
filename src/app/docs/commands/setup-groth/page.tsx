@@ -20,10 +20,29 @@ export default function SetupGrothCommandPage() {
         <p className="text-muted-foreground">
           The{" "}
           <code className="bg-muted px-1.5 py-0.5 rounded">setup:groth</code>{" "}
-          command performs a Groth16-specific trusted setup ceremony to generate
-          proving and verification keys optimized for the Groth16 proving
-          system.
+          command wraps <strong>snarkjs groth16 setup</strong> to perform Phase
+          2 of the trusted setup, generating circuit-specific proving and
+          verification keys for the Groth16 proving system.
         </p>
+
+        <Card className="p-4 border-l-4 border-l-primary bg-muted/30">
+          <p className="text-sm text-muted-foreground mb-2">
+            <strong className="text-foreground">Under the hood:</strong> This
+            command runs snarkjs operations:
+          </p>
+          <ul className="text-xs space-y-1 ml-4 list-disc text-muted-foreground">
+            <li>
+              <code className="bg-muted px-1 py-0.5 rounded">
+                snarkjs groth16 setup [r1cs] [ptau] circuit_0000.zkey
+              </code>
+            </li>
+            <li>
+              <code className="bg-muted px-1 py-0.5 rounded">
+                snarkjs zkey export verificationkey
+              </code>
+            </li>
+          </ul>
+        </Card>
       </div>
 
       <Separator />

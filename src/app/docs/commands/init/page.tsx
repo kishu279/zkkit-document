@@ -20,9 +20,19 @@ export default function InitCommandPage() {
         <h2 className="text-2xl font-semibold">Description</h2>
         <p className="text-muted-foreground">
           The <code className="bg-muted px-1.5 py-0.5 rounded">init</code>{" "}
-          command creates a new zkkit project structure with all necessary
-          directories and configuration files.
+          command scaffolds a new zkkit project structure with directories for
+          circuits, inputs, and outputs. It also creates a sample Circom circuit
+          and input file to get you started.
         </p>
+
+        <Card className="p-4 border-l-4 border-l-primary bg-muted/30">
+          <p className="text-sm text-muted-foreground">
+            <strong className="text-foreground">What it creates:</strong> This
+            is a convenience command that sets up the folder structure and
+            sample files. No external tools are called - it simply creates
+            directories and writes starter files.
+          </p>
+        </Card>
       </div>
 
       <Separator />

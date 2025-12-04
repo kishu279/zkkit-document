@@ -20,10 +20,39 @@ export default function SetupTrustedCommandPage() {
         <p className="text-muted-foreground">
           The{" "}
           <code className="bg-muted px-1.5 py-0.5 rounded">setup:trusted</code>{" "}
-          command runs a trusted setup ceremony to generate the proving and
-          verification keys required for creating and verifying zero-knowledge
-          proofs.
+          command wraps <strong>snarkjs powersoftau</strong> commands to perform
+          the Powers of Tau ceremony (Phase 1 of trusted setup). This generates
+          common reference parameters used by multiple circuits.
         </p>
+
+        <Card className="p-4 border-l-4 border-l-primary bg-muted/30">
+          <p className="text-sm text-muted-foreground mb-2">
+            <strong className="text-foreground">Under the hood:</strong> This
+            command orchestrates multiple snarkjs operations:
+          </p>
+          <ul className="text-xs space-y-1 ml-4 list-disc text-muted-foreground">
+            <li>
+              <code className="bg-muted px-1 py-0.5 rounded">
+                snarkjs powersoftau new bn128 12 pot12_0000.ptau
+              </code>
+            </li>
+            <li>
+              <code className="bg-muted px-1 py-0.5 rounded">
+                snarkjs powersoftau contribute
+              </code>
+            </li>
+            <li>
+              <code className="bg-muted px-1 py-0.5 rounded">
+                snarkjs powersoftau prepare phase2
+              </code>
+            </li>
+            <li>
+              <code className="bg-muted px-1 py-0.5 rounded">
+                snarkjs powersoftau verify
+              </code>
+            </li>
+          </ul>
+        </Card>
       </div>
 
       <Separator />
