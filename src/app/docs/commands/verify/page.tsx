@@ -1,6 +1,7 @@
 import { CommandBlock } from "@/components/CommandBlock";
 import { Separator } from "@/components/ui/separator";
 import { Card } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function VerifyCommandPage() {
   return (
@@ -92,6 +93,131 @@ export default function VerifyCommandPage() {
               ✗ Proof is invalid - Verification failed
             </li>
           </ul>
+        </Card>
+      </div>
+
+      <Separator />
+
+      <div className="space-y-4">
+        <Card className="p-6">
+          <h2 className="text-2xl font-bold mb-4">Implementation</h2>
+          <p className="text-muted-foreground mb-4">
+            View how this command works under the hood:
+          </p>
+
+          <Tabs defaultValue="api" className="w-full">
+            <TabsList className="grid w-full grid-cols-2">
+              <TabsTrigger value="api">API Function</TabsTrigger>
+              <TabsTrigger value="cli">CLI Command</TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="api" className="space-y-4">
+              <div className="bg-muted/30 rounded-lg p-4 border-l-4 border-l-primary">
+                <p className="text-sm font-mono mb-2 text-muted-foreground">
+                  src/commands/verify.js
+                </p>
+                <pre className="text-sm overflow-x-auto">
+                  <code>{`import { run } from "../utils/exec.js";
+
+export default async function verify(opts = {}) {
+  const {
+    verification = "verification_key.json",
+    output = "public.json",
+    proof = "proof.json",
+  } = opts;
+
+  const result = await run(
+    \`snarkjs groth16 verify \${verification} \${output} \${proof}\`
+  );
+
+  console.log(
+    result.includes("OK") ? "✔ Proof verified" : "✘ Verification failed"
+  );
+}`}</code>
+                </pre>
+              </div>
+
+              <div className="mt-4 space-y-2">
+                <h3 className="text-lg font-semibold">What it does:</h3>
+                <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+                  <li>
+                    Accepts verification key filename (defaults to{" "}
+                    <code className="text-sm bg-muted px-1 py-0.5 rounded">
+                      verification_key.json
+                    </code>
+                    )
+                  </li>
+                  <li>
+                    Accepts public signals filename (defaults to{" "}
+                    <code className="text-sm bg-muted px-1 py-0.5 rounded">
+                      public.json
+                    </code>
+                    )
+                  </li>
+                  <li>
+                    Accepts proof filename (defaults to{" "}
+                    <code className="text-sm bg-muted px-1 py-0.5 rounded">
+                      proof.json
+                    </code>
+                    )
+                  </li>
+                  <li>
+                    Uses Groth16 verification algorithm to check proof validity
+                  </li>
+                  <li>
+                    Checks if the output contains "OK" to determine success
+                  </li>
+                  <li>
+                    Returns verification status without accessing private inputs
+                  </li>
+                  <li>
+                    Verification is fast and can be done by anyone with the
+                    public files
+                  </li>
+                </ul>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="cli" className="space-y-4">
+              <div className="bg-muted/30 rounded-lg p-4 border-l-4 border-l-emerald-500">
+                <p className="text-sm font-mono mb-2 text-muted-foreground">
+                  Terminal Command
+                </p>
+                <CommandBlock command="zkkit verify [circuit-name]" />
+              </div>
+
+              <div className="space-y-2">
+                <h3 className="text-lg font-semibold">CLI Usage:</h3>
+                <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+                  <li>
+                    <code className="text-sm bg-muted px-1 py-0.5 rounded">
+                      [circuit-name]
+                    </code>{" "}
+                    - Name of your circuit
+                  </li>
+                  <li>
+                    <code className="text-sm bg-muted px-1 py-0.5 rounded">
+                      --proof
+                    </code>{" "}
+                    - Path to proof file (default: proof.json)
+                  </li>
+                  <li>
+                    <code className="text-sm bg-muted px-1 py-0.5 rounded">
+                      --public
+                    </code>{" "}
+                    - Path to public signals file (default: public.json)
+                  </li>
+                  <li>
+                    <code className="text-sm bg-muted px-1 py-0.5 rounded">
+                      --vkey
+                    </code>{" "}
+                    - Path to verification key (default: verification_key.json)
+                  </li>
+                  <li>Verifies proof validity using public parameters only</li>
+                </ul>
+              </div>
+            </TabsContent>
+          </Tabs>
         </Card>
       </div>
 

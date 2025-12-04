@@ -14,6 +14,8 @@ export function Hero() {
           <Button size="lg">Get Started</Button>
         </Link>
 
+        {/* Social Links - Commented out */}
+        {/* 
         <div className="flex items-center gap-6">
           <a
             href="https://github.com/yourusername/zkkit"
@@ -66,6 +68,7 @@ export function Hero() {
             <span className="text-sm font-medium">Twitter</span>
           </a>
         </div>
+        */}
       </div>
 
       <p className="text-sm text-muted-foreground max-w-xl mx-auto">

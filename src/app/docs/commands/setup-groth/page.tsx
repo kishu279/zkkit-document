@@ -1,6 +1,7 @@
 import { CommandBlock } from "@/components/CommandBlock";
 import { Separator } from "@/components/ui/separator";
 import { Card } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function SetupGrothCommandPage() {
   return (
@@ -107,6 +108,116 @@ export default function SetupGrothCommandPage() {
           producing very small proofs with fast verification times. However, it
           requires a circuit-specific trusted setup.
         </p>
+      </div>
+
+      <Separator />
+
+      <div className="space-y-4">
+        <Card className="p-6">
+          <h2 className="text-2xl font-bold mb-4">Implementation</h2>
+          <p className="text-muted-foreground mb-4">
+            View how this command works under the hood:
+          </p>
+
+          <Tabs defaultValue="api" className="w-full">
+            <TabsList className="grid w-full grid-cols-2">
+              <TabsTrigger value="api">API Function</TabsTrigger>
+              <TabsTrigger value="cli">CLI Command</TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="api" className="space-y-4">
+              <div className="bg-muted/30 rounded-lg p-4 border-l-4 border-l-primary">
+                <p className="text-sm font-mono mb-2 text-muted-foreground">
+                  src/commands/groth.js
+                </p>
+                <pre className="text-sm overflow-x-auto">
+                  <code>{`import { run } from "../utils/exec.js";
+
+export default async function groth(opts = {}) {
+  const { verification = "verification_key.json" } = opts;
+
+  await run(
+    "snarkjs groth16 setup outputs/schema.r1cs pot12_final.ptau circuit_0000.zkey"
+  );
+  
+  await run(
+    \`snarkjs zkey export verificationkey circuit_0000.zkey \${verification}\`
+  );
+
+  console.log("✔ Groth16 setup completed");
+}`}</code>
+                </pre>
+              </div>
+
+              <div className="mt-4 space-y-2">
+                <h3 className="text-lg font-semibold">What it does:</h3>
+                <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+                  <li>
+                    Accepts verification key output filename (defaults to{" "}
+                    <code className="text-sm bg-muted px-1 py-0.5 rounded">
+                      verification_key.json
+                    </code>
+                    )
+                  </li>
+                  <li>
+                    <strong>Step 1:</strong> Performs Groth16-specific setup
+                    using R1CS and Powers of Tau
+                  </li>
+                  <li>
+                    <strong>Step 2:</strong> Generates the proving key (
+                    <code className="text-sm bg-muted px-1 py-0.5 rounded">
+                      circuit_0000.zkey
+                    </code>
+                    )
+                  </li>
+                  <li>
+                    <strong>Step 3:</strong> Exports the verification key from
+                    the zkey file
+                  </li>
+                  <li>
+                    Creates circuit-specific keys required for proof generation
+                    and verification
+                  </li>
+                </ul>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="cli" className="space-y-4">
+              <div className="bg-muted/30 rounded-lg p-4 border-l-4 border-l-emerald-500">
+                <p className="text-sm font-mono mb-2 text-muted-foreground">
+                  Terminal Command
+                </p>
+                <CommandBlock command="zkkit setup:groth [circuit-name]" />
+              </div>
+
+              <div className="space-y-2">
+                <h3 className="text-lg font-semibold">CLI Usage:</h3>
+                <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+                  <li>
+                    <code className="text-sm bg-muted px-1 py-0.5 rounded">
+                      [circuit-name]
+                    </code>{" "}
+                    - Name of your circuit
+                  </li>
+                  <li>
+                    <code className="text-sm bg-muted px-1 py-0.5 rounded">
+                      --ptau
+                    </code>{" "}
+                    - Path to powers of tau file
+                  </li>
+                  <li>
+                    <code className="text-sm bg-muted px-1 py-0.5 rounded">
+                      --contributions
+                    </code>{" "}
+                    - Number of contributions (default: 1)
+                  </li>
+                  <li>Generates circuit-specific Groth16 proving key</li>
+                  <li>Exports verification key for proof verification</li>
+                </ul>
+              </div>
+            </TabsContent>
+          </Tabs>
+        </Card>
       </div>
     </div>
   );

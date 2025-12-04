@@ -1,6 +1,7 @@
 import { CommandBlock } from "@/components/CommandBlock";
 import { Separator } from "@/components/ui/separator";
 import { Card } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function CompileCommandPage() {
   return (
@@ -100,6 +101,110 @@ export default function CompileCommandPage() {
               - Symbol information
             </li>
           </ul>
+        </Card>
+
+        <Card className="p-6">
+          <h2 className="text-2xl font-bold mb-4">Implementation</h2>
+          <p className="text-muted-foreground mb-4">
+            View how this command works under the hood:
+          </p>
+
+          <Tabs defaultValue="api" className="w-full">
+            <TabsList className="grid w-full grid-cols-2">
+              <TabsTrigger value="api">API Function</TabsTrigger>
+              <TabsTrigger value="cli">CLI Command</TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="api" className="space-y-4">
+              <div className="bg-muted/30 rounded-lg p-4 border-l-4 border-l-primary">
+                <p className="text-sm font-mono mb-2 text-muted-foreground">
+                  src/commands/compile.js
+                </p>
+                <pre className="text-sm overflow-x-auto">
+                  <code>{`import { run } from "../utils/exec.js";
+
+export default async function compile(opts = {}) {
+  const { circuit = "circuits/schema.circom" } = opts;
+
+  await run(\`circom \${circuit} --r1cs --wasm -o outputs\`);
+  
+  console.log("✔ Circuit compiled");
+}`}</code>
+                </pre>
+              </div>
+
+              <div className="mt-4 space-y-2">
+                <h3 className="text-lg font-semibold">What it does:</h3>
+                <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+                  <li>
+                    Takes circuit path as parameter (defaults to{" "}
+                    <code className="text-sm bg-muted px-1 py-0.5 rounded">
+                      circuits/schema.circom
+                    </code>
+                    )
+                  </li>
+                  <li>
+                    Executes the Circom compiler with{" "}
+                    <code className="text-sm bg-muted px-1 py-0.5 rounded">
+                      --r1cs
+                    </code>{" "}
+                    flag to generate constraint system
+                  </li>
+                  <li>
+                    Uses{" "}
+                    <code className="text-sm bg-muted px-1 py-0.5 rounded">
+                      --wasm
+                    </code>{" "}
+                    flag to generate WebAssembly binary
+                  </li>
+                  <li>
+                    Outputs compiled files to the{" "}
+                    <code className="text-sm bg-muted px-1 py-0.5 rounded">
+                      outputs/
+                    </code>{" "}
+                    directory
+                  </li>
+                  <li>Returns success message when compilation completes</li>
+                </ul>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="cli" className="space-y-4">
+              <div className="bg-muted/30 rounded-lg p-4 border-l-4 border-l-emerald-500">
+                <p className="text-sm font-mono mb-2 text-muted-foreground">
+                  Terminal Command
+                </p>
+                <CommandBlock command="zkkit compile --circuit circuits/schema.circom" />
+              </div>
+
+              <div className="space-y-2">
+                <h3 className="text-lg font-semibold">CLI Usage:</h3>
+                <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+                  <li>
+                    Use{" "}
+                    <code className="text-sm bg-muted px-1 py-0.5 rounded">
+                      --circuit
+                    </code>{" "}
+                    flag to specify your Circom file
+                  </li>
+                  <li>
+                    Default circuit path is{" "}
+                    <code className="text-sm bg-muted px-1 py-0.5 rounded">
+                      circuits/schema.circom
+                    </code>
+                  </li>
+                  <li>Generates R1CS constraint system and WASM binary</li>
+                  <li>
+                    All output files are saved to{" "}
+                    <code className="text-sm bg-muted px-1 py-0.5 rounded">
+                      outputs/
+                    </code>{" "}
+                    directory
+                  </li>
+                </ul>
+              </div>
+            </TabsContent>
+          </Tabs>
         </Card>
       </div>
     </div>
