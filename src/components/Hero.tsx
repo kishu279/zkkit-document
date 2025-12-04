@@ -6,7 +6,7 @@ export function Hero() {
     <section className="container mx-auto text-center py-20 md:py-32">
       <h1 className="text-5xl md:text-7xl font-bold mb-6">zkkit</h1>
       <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-        Zero-knowledge proof workflow toolkit
+        Zero-knowledge made frictionless: proof generation in a single workflow.
       </p>
 
       <div className="flex flex-col items-center gap-6 mb-6">

@@ -2,6 +2,7 @@ import { CommandBlock } from "@/components/CommandBlock";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Card } from "@/components/ui/card";
+import Link from "next/link";
 
 export default function InstallationPage() {
   return (
@@ -238,14 +239,58 @@ export default function InstallationPage() {
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold">Next Steps</h2>
         <p className="text-muted-foreground">
-          Now that you have zkkit installed, you can:
+          Now that you have zkkit installed, explore the available commands:
         </p>
-        <ul className="list-disc list-inside space-y-2 text-muted-foreground ml-4">
-          <li>Initialize a new zkkit project</li>
-          <li>Learn about circuit development</li>
-          <li>Explore the API reference</li>
-          <li>Check out example projects</li>
-        </ul>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+          <Link href="/docs/commands/init">
+            <Card className="p-4 hover:bg-accent transition-colors cursor-pointer">
+              <h3 className="font-semibold mb-1">zkkit init</h3>
+              <p className="text-sm text-muted-foreground">
+                Initialize a new project
+              </p>
+            </Card>
+          </Link>
+          <Link href="/docs/commands/compile">
+            <Card className="p-4 hover:bg-accent transition-colors cursor-pointer">
+              <h3 className="font-semibold mb-1">zkkit compile</h3>
+              <p className="text-sm text-muted-foreground">Compile circuits</p>
+            </Card>
+          </Link>
+          <Link href="/docs/commands/witness">
+            <Card className="p-4 hover:bg-accent transition-colors cursor-pointer">
+              <h3 className="font-semibold mb-1">zkkit witness</h3>
+              <p className="text-sm text-muted-foreground">
+                Generate witness files
+              </p>
+            </Card>
+          </Link>
+          <Link href="/docs/commands/setup-trusted">
+            <Card className="p-4 hover:bg-accent transition-colors cursor-pointer">
+              <h3 className="font-semibold mb-1">zkkit setup:trusted</h3>
+              <p className="text-sm text-muted-foreground">
+                Trusted setup ceremony
+              </p>
+            </Card>
+          </Link>
+          <Link href="/docs/commands/setup-groth">
+            <Card className="p-4 hover:bg-accent transition-colors cursor-pointer">
+              <h3 className="font-semibold mb-1">zkkit setup:groth</h3>
+              <p className="text-sm text-muted-foreground">Groth16 setup</p>
+            </Card>
+          </Link>
+          <Link href="/docs/commands/proof">
+            <Card className="p-4 hover:bg-accent transition-colors cursor-pointer">
+              <h3 className="font-semibold mb-1">zkkit proof</h3>
+              <p className="text-sm text-muted-foreground">Generate proofs</p>
+            </Card>
+          </Link>
+          <Link href="/docs/commands/verify">
+            <Card className="p-4 hover:bg-accent transition-colors cursor-pointer">
+              <h3 className="font-semibold mb-1">zkkit verify</h3>
+              <p className="text-sm text-muted-foreground">Verify proofs</p>
+            </Card>
+          </Link>
+        </div>
       </div>
     </div>
   );
