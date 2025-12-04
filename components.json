@@ -12,11 +12,11 @@
   },
   "iconLibrary": "lucide",
   "aliases": {
-    "components": "@zkkit/components",
-    "utils": "@zkkit/lib/utils",
-    "ui": "@zkkit/components/ui",
-    "lib": "@zkkit/lib",
-    "hooks": "@zkkit/hooks"
+    "components": "@/components",
+    "utils": "@/lib/utils",
+    "ui": "@/components/ui",
+    "lib": "@/lib",
+    "hooks": "@/hooks"
   },
   "registries": {}
 }
