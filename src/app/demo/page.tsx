@@ -8,8 +8,8 @@ export default function page() {
       <Navbar />
       <div className="w-full flex flex-col items-center justify-center py-18 ">
         <iframe
-          width="1323"
-          height="749"
+          width={demo.width}
+          height={demo.height}
           src={demo.link}
           title={demo.title}
           //   frameborder="0"

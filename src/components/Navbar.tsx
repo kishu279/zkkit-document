@@ -1,16 +1,20 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import ToggleModleButton from "@/components/toggle-button";
 
 export function Navbar() {
   return (
-    <nav className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
+    <nav className="border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60 sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-        <Link
-          href="/"
-          className="text-xl font-bold hover:opacity-80 transition-opacity"
-        >
-          zkkit
-        </Link>
+        <div className="flex items-center gap-4">
+          <Link
+            href="/"
+            className="text-xl font-bold hover:opacity-80 transition-opacity"
+          >
+            zkkit
+          </Link>
+          <ToggleModleButton />
+        </div>
 
         <div className="flex items-center gap-6">
           <Link

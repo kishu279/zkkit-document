@@ -6,7 +6,10 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const demo = {
-  title:
-    "SHIN CHAN THUG LIFE | shin chan thug life shin chan funny moment ##shinchan #theboysmeme #trending",
-  link: "https://www.youtube.com/embed/ZIZeWGxbL6E",
+  title: "zkkit demo",
+  link: "https://www.youtube.com/embed/XwTkb7AwKLs",
+  width: 1332,
+  height: 749
 };
+
+
