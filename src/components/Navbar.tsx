@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import ToggleModleButton from "@/components/toggle-button";
+import {ModeToggle} from "@/components/toggle-button";
 
 export function Navbar() {
   return (
@@ -13,7 +13,7 @@ export function Navbar() {
           >
             zkkit
           </Link>
-          <ToggleModleButton />
+          <ModeToggle />
         </div>
 
         <div className="flex items-center gap-6">
