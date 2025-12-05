@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import {ModeToggle} from "@/components/toggle-button";
+import { ModeToggle } from "@/components/toggle-button";
 
 export function Navbar() {
   return (
@@ -13,7 +13,6 @@ export function Navbar() {
           >
             zkkit
           </Link>
-          <ModeToggle />
         </div>
 
         <div className="flex items-center gap-6">
@@ -37,9 +36,12 @@ export function Navbar() {
           >
             NPM
           </a>
-          <Link href="/docs">
-            <Button size="sm">Get Started</Button>
-          </Link>
+          <div className="flex space-x-4">
+            <Link href="/docs">
+              <Button size="sm">Get Started</Button>
+            </Link>
+            <ModeToggle />
+          </div>
         </div>
       </div>
     </nav>
